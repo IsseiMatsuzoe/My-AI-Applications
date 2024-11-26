@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Calendar Assistant</title>
+</head>
+<body>
+    <h1>Google Calendar Assistant</h1>
+    <form id="scheduleForm">
+        <label for="input">スケジュールを入力してください:</label><br>
+        <input type="text" id="input" name="input" required><br><br>
+        <button type="submit">送信</button>
+    </form>
+
+    <div id="result" style="margin-top: 20px;"></div>
+
+    <script>
+        const form = document.getElementById('scheduleForm');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const input = document.getElementById('input').value;
+            const response = await fetch('/schedule', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ input })
+            });
+            const result = await response.json();
+            const resultDiv = document.getElementById('result');
+            if (result.message) {
+                resultDiv.innerHTML = `<p>${result.message}</p><a href="${result.link}" target="_blank">イベントを確認</a>`;
+            } else {
+                resultDiv.innerHTML = `<p>Error: ${result.error}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
+使い方
