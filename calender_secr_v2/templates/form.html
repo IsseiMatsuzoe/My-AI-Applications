@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>Calender Secretary Version-2</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+        <h1>予定を入力してください</h1>
+        <form method="post" action="{{ url_for('schedule') }}">
+            <label for="input">スケジュールを入力してください:</label><br>
+            <input type="text" name="input" required><br><br>
+            <button type="submit">送信</button>
+        </form>
+    </body>
+</html>

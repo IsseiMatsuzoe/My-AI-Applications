@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>Calender Secretary Version-2</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <h1>Google Calender Secretary</h1>
+    {% if events == [] %}
+        <p>予定はありません。</p>
+    {% else %}
+        <table>
+            <th>予定</th>
+            <th>開始時刻</th>
+            <th>終了時刻</th>
+            {% for event in events %}
+                <tr>
+                    <td>{{ event.summary }}</td>
+                    <td>{{ event.start }}</td>
+                    <td>{{ event.end }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    <a href="{{ url_for('form') }}">予定を追加</a>
+</body>
+</html>
